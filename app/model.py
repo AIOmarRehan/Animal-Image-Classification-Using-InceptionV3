@@ -31,4 +31,3 @@ def predict(img: Image.Image):
     prob_dict = {CLASS_NAMES[i]: float(probs[i]) for i in range(len(CLASS_NAMES))}
 
     return CLASS_NAMES[class_idx], confidence, prob_dict
-
