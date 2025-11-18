@@ -3,6 +3,7 @@ import numpy as np
 from PIL import Image
 
 # Load your trained CNN model
+# In the notebook, the file was named “Simple_CNN_Classification.hs.” You may rename it locally on your machine as needed
 model = tf.keras.models.load_model("saved_model/Animal_Classification.h5")
 
 # Same label order you used when training (from LabelEncoder)
@@ -30,3 +31,4 @@ def predict(img: Image.Image):
     prob_dict = {CLASS_NAMES[i]: float(probs[i]) for i in range(len(CLASS_NAMES))}
 
     return CLASS_NAMES[class_idx], confidence, prob_dict
+
