@@ -9,14 +9,6 @@ model = tf.keras.models.load_model("saved_model/Animal_Classification.h5")
 CLASS_NAMES = ["Cat", "Dog", "Snake"]
 
 def preprocess_image(img: Image.Image, target_size=(256, 256)):
-    """
-    Preprocess a PIL image to match training pipeline:
-    - Convert to RGB
-    - Resize
-    - Convert to float32
-    - Normalize to [0,1]
-    - Add batch dimension
-    """
     img = img.convert("RGB")  # ensure 3 channels
     img = img.resize(target_size)
     img = np.array(img).astype("float32") / 255.0  # normalize
