@@ -261,7 +261,7 @@ Training and validation curves are plotted to monitor:
 
 These plots confirm that fine-tuning improves validation performance without introducing instability.
 
-![Charts](images/eval#1.png)
+![Charts](Images/eval#1.png)
 
 ---
 
@@ -274,7 +274,7 @@ A confusion matrix is computed to visualize class-level performance:
 
 Both annotated and heatmap-style confusion matrices are generated.
 
-![Confusion Matrix](images/eval#2.png)
+![Confusion Matrix](Images/eval#2.png)
 
 ---
 
@@ -325,7 +325,7 @@ To further evaluate model discrimination:
 
 These curves demonstrate strong separability across all classes.
 
-![ROC Curves](images/eval#3.png)
+![ROC Curves](Images/eval#3.png)
 
 ---
 
