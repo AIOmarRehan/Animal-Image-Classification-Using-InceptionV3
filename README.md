@@ -194,7 +194,7 @@ This setup allows the model to learn dataset-specific patterns while avoiding ov
 
 ---
 
-## 7. Initial Training (Frozen Backbone)
+## 7. Initial Training (Frozen Backbone "Feature Extraction")
 
 The model is compiled using:
 
