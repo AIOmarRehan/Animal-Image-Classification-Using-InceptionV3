@@ -166,78 +166,171 @@ Split structure:
 
 ## 6. Model — Transfer Learning with InceptionV3
 
+The model is built using **InceptionV3 pretrained on ImageNet** as a feature extractor.
+
 ```python
-from tensorflow.keras.applications import InceptionV3
+inception = InceptionV3(
+    input_shape=input_shape,
+    weights="imagenet",
+    include_top=False
+)
+```
 
-base_model = InceptionV3(weights='imagenet', include_top=False)
+At first, **all backbone layers are frozen** to preserve pretrained representations:
 
-for layer in base_model.layers:
+```python
+for layer in inception.layers:
     layer.trainable = False
 ```
 
-Classification head:
+A custom classification head is added:
 
 * GlobalAveragePooling2D
 * Dense(512, ReLU)
 * Dropout(0.5)
-* Softmax
+* Dense(N, Softmax) — where *N = number of classes*
 
-Compile:
-
-```python
-model.compile(
-    optimizer='adam',
-    loss='sparse_categorical_crossentropy',
-    metrics=['accuracy']
-)
-```
+This setup allows the model to learn dataset-specific patterns while avoiding overfitting during early training.
 
 ---
 
-## 7. Training
+## 7. Initial Training (Frozen Backbone)
+
+The model is compiled using:
+
+* **Loss**: `sparse_categorical_crossentropy`
+* **Optimizer**: Adam
+* **Metric**: Accuracy
+
+Training is performed with callbacks to improve stability:
+
+* **EarlyStopping** (restore best weights)
+* **ModelCheckpoint** (save best model)
+* **ReduceLROnPlateau**
+
+```python
+history = model.fit(
+    train_ds,
+    validation_data=val_ds,
+    epochs=5,
+    callbacks=callbacks
+)
+```
+
+This stage allows the new classification head to converge while keeping the pretrained backbone intact.
+
+---
+
+## 8. Fine-Tuning the InceptionV3 Backbone
+
+After the initial convergence, **fine-tuning is applied** to improve performance.
+
+The **last 30 layers** of InceptionV3 are unfrozen:
+
+```python
+for layer in inception.layers[-30:]:
+    layer.trainable = True
+```
+
+The model is then recompiled and trained again:
 
 ```python
 history = model.fit(
     train_ds,
     validation_data=val_ds,
     epochs=10,
-    callbacks=[...]
+    callbacks=callbacks
 )
 ```
 
-Using:
-
-* EarlyStopping
-* ModelCheckpoint
-* ReduceLROnPlateau
-
-The model converged quickly thanks to the cleaned dataset.
+Fine-tuning allows higher-level convolutional filters to adapt to the animal dataset, resulting in better class separation and generalization.
 
 ---
 
-## 8. Evaluation & Saving
+## 9. Model Evaluation
+
+The final model is evaluated on a **held-out test set**.
+
+### Accuracy & Loss Curves
+
+Training and validation curves are plotted to monitor:
+
+* Convergence behavior
+* Overfitting
+* Generalization stability
+
+These plots confirm that fine-tuning improves validation performance without introducing instability.
+
+---
+
+### Confusion Matrix
+
+A confusion matrix is computed to visualize class-level performance:
+
+* Highlights misclassification patterns
+* Reveals class confusion (e.g., visually similar animals)
+
+Both annotated and heatmap-style confusion matrices are generated.
+
+---
+
+### Classification Metrics
+
+The following metrics are computed on the test set:
+
+* **Accuracy**
+* **Precision (macro)**
+* **Recall (macro)**
+* **F1-score (macro)**
+
+A detailed **per-class classification report** is also produced:
+
+* Precision
+* Recall
+* F1-score
+* Support
+
+This provides a deeper understanding beyond accuracy alone.
+
+---
+
+### ROC Curves (Multi-Class)
+
+To further evaluate model discrimination:
+
+* One-vs-Rest ROC curves are generated per class
+* A **macro-average ROC curve** is computed
+* AUC is reported for overall performance
+
+These curves demonstrate strong separability across all classes.
+
+---
+
+## 10. Final Model
+
+The best-performing model (after fine-tuning) is saved and later used for deployment:
 
 ```python
-model.evaluate(test_ds)
-model.save("Simple_CNN_Classification.h5")
+model.save("Inception_V3_Animals_Classification.h5")
 ```
+
+This trained model is deployed using **FastAPI + Docker** for inference and **Gradio on Hugging Face Spaces** for public interaction.
 
 ---
 
-## Key Takeaways
+## Updated Key Takeaways
 
-The biggest lesson from this project:
+> **Clean data enables strong fine-tuning.**
 
-> **A strong deep-learning model starts with a clean dataset.**
+By combining:
 
-Cleaning the data took more time than training the model—but it directly improved accuracy, stability, and model reliability.
+* Rigorous dataset validation
+* Transfer learning
+* Selective fine-tuning
+* Comprehensive evaluation
 
-If you're building your own image classification project, always verify:
+the model achieves **high accuracy, stable convergence, and reliable real-world performance**.
 
-* Dataset quality
-* Brightness/contrast issues
-* Duplicate removal
-* Class consistency
-* Resolution outliers
+Fine-tuning only a subset of pretrained layers strikes the optimal balance between **generalization and specialization**.
 
-Clean data makes everything else easier.
+---
