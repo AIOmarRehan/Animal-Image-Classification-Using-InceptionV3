@@ -292,8 +292,7 @@ A detailed **per-class classification report** is also produced:
 This provides a deeper understanding beyond accuracy alone.
 
 ```
-10/10 ━━━━━━━━━━━━━━━━━━━━ 1s 106ms/step - accuracy: 0.9826 - loss: 0.3082
-Test Accuracy: 0.9900
+10/10 ━━━━━━━━━━━━━━━━━━━━ 1s 106ms/step - accuracy: 0.9826 - loss: 0.3082 - Test Accuracy: 0.9900
 10/10 ━━━━━━━━━━━━━━━━━━━━ 1s 93ms/step
 
 Classification Report:
