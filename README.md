@@ -261,6 +261,8 @@ Training and validation curves are plotted to monitor:
 
 These plots confirm that fine-tuning improves validation performance without introducing instability.
 
+![Charts](images/eval#1.png)
+
 ---
 
 ### Confusion Matrix
@@ -271,6 +273,8 @@ A confusion matrix is computed to visualize class-level performance:
 * Reveals class confusion (e.g., visually similar animals)
 
 Both annotated and heatmap-style confusion matrices are generated.
+
+![Confusion Matrix](images/eval#2.png)
 
 ---
 
@@ -292,6 +296,23 @@ A detailed **per-class classification report** is also produced:
 
 This provides a deeper understanding beyond accuracy alone.
 
+```python
+10/10 ━━━━━━━━━━━━━━━━━━━━ 1s 106ms/step - accuracy: 0.9826 - loss: 0.3082
+Test Accuracy: 0.9900
+10/10 ━━━━━━━━━━━━━━━━━━━━ 1s 93ms/step
+
+Classification Report:
+              precision    recall  f1-score   support
+
+        cats       0.99      0.97      0.98       100
+        dogs       0.97      0.99      0.98       100
+      snakes       1.00      1.00      1.00       100
+
+    accuracy                           0.99       300
+   macro avg       0.99      0.99      0.99       300
+weighted avg       0.99      0.99      0.99       300
+```
+
 ---
 
 ### ROC Curves (Multi-Class)
@@ -303,6 +324,8 @@ To further evaluate model discrimination:
 * AUC is reported for overall performance
 
 These curves demonstrate strong separability across all classes.
+
+![ROC Curves](images/eval#3.png)
 
 ---
 
