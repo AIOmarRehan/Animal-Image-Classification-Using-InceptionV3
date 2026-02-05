@@ -241,12 +241,3 @@ If you're building your own image classification project, always verify:
 * Resolution outliers
 
 Clean data makes everything else easier.
-
----
-
-## Future Improvements
-
-* Advanced augmentation (CutMix, MixUp)
-* Fine-tuning InceptionV3’s deeper layers in another dataset
-* Converting model to TensorFlow Lite
-* Deploying on my own website
