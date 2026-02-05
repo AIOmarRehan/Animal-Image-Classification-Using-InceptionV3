@@ -7,7 +7,7 @@
 
 This project implements a **full deep-learning workflow** for classifying animal images using **TensorFlow + InceptionV3**, with a major focus on **dataset validation and cleaning**. Before training the model, I built a comprehensive system to detect corrupted images, duplicates, brightness/contrast issues, mislabeled samples, and resolution outliers.
 
-This repository contains the full pipeline—from dataset extraction to evaluation and model saving.
+This repository contains the full pipeline, from dataset extraction to evaluation and model saving.
 
 ---
 
@@ -96,7 +96,7 @@ This revealed imbalance and inconsistent image sizes early.
 
 Random images were displayed with their brightness, contrast, and shape to manually confirm dataset quality.
 
-This step prevents hidden issues—especially in community-created or scraped datasets.
+This step prevents hidden issues, especially in community-created or scraped datasets.
 
 ---
 
@@ -164,7 +164,7 @@ Split structure:
 
 ---
 
-## 6. Model — Transfer Learning with InceptionV3
+## 6. Model - Transfer Learning with InceptionV3
 
 The model is built using **InceptionV3 pretrained on ImageNet** as a feature extractor.
 
@@ -188,7 +188,7 @@ A custom classification head is added:
 * GlobalAveragePooling2D
 * Dense(512, ReLU)
 * Dropout(0.5)
-* Dense(N, Softmax) — where *N = number of classes*
+* Dense(N, Softmax) - where *N = number of classes*
 
 This setup allows the model to learn dataset-specific patterns while avoiding overfitting during early training.
 
