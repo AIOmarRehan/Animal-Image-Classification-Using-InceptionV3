@@ -227,11 +227,6 @@ After the initial convergence, **fine-tuning is applied** to improve performance
 
 The **last 30 layers** of InceptionV3 are unfrozen:
 
-```python
-for layer in inception.layers[-30:]:
-    layer.trainable = True
-```
-
 The model is then recompiled and trained again:
 
 ```python
@@ -261,12 +256,7 @@ Training and validation curves are plotted to monitor:
 
 These plots confirm that fine-tuning improves validation performance without introducing instability.
 
-```
-<p align="center">
-  <img src="https://files.catbox.moe/qatkd6.png" width="100%">
-</p>
-
-```
+![Charts](https://files.catbox.moe/qatkd6.png)
 
 ---
 
@@ -279,12 +269,7 @@ A confusion matrix is computed to visualize class-level performance:
 
 Both annotated and heatmap-style confusion matrices are generated.
 
-```
-<p align="center">
-  <img src="https://files.catbox.moe/ih64qj.png" width="100%">
-</p>
-
-```
+![Confusion Matrix](https://files.catbox.moe/ih64qj.png)
 
 ---
 
@@ -335,12 +320,7 @@ To further evaluate model discrimination:
 
 These curves demonstrate strong separability across all classes.
 
-```
-<p align="center">
-  <img src="https://files.catbox.moe/a8aaa5.png" width="100%">
-</p>
-
-```
+![ROC Curve](https://files.catbox.moe/a8aaa5.png)
 
 ---
 
