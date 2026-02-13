@@ -1,6 +1,9 @@
 [If you would like a detailed explanation of this project, please refer to the Medium article below.](https://medium.com/@ai.omar.rehan/building-a-clean-reliable-and-accurate-animal-classifier-using-inceptionv3-175f30fbe6f3)
 
 ---
+[The project is also available for testing on Hugging Face.](https://huggingface.co/spaces/AIOmarRehan/Inceptionv3_Dog_VS_Cat_Classifier)
+
+---
 # Animal Image Classification Using InceptionV3
 
 *A complete end-to-end pipeline for building a clean, reliable deep-learning classifier.*
