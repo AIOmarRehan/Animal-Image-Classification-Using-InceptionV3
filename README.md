@@ -354,3 +354,6 @@ the model achieves **high accuracy, stable convergence, and reliable real-world 
 Fine-tuning only a subset of pretrained layers strikes the optimal balance between **generalization and specialization**.
 
 ---
+
+## Results (Downloadable File)
+Click on this hyperlink to watch the video: [Watch Video](https://img.remit.ee/api/file/CgACAgUAAyEGAASHRsPbAAER1T9puuWDHAIpMzDQIh1OzpigUr6WkQACeCIAAud12VVnrKhp64V2NDoE.mp4)
